@@ -1,0 +1,14 @@
+---
+# handlers file for tamay.jira
+
+- name: "Reload systemd"
+  systemd:
+    daemon-reload: yes
+  listen: start_jira
+
+- name: "Start jira"
+  service:
+    name: jira-software
+    state: started
+    enabled: yes
+  listen: start_jira

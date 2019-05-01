@@ -1,0 +1,13 @@
+[Unit]
+Description=jira-software
+After=network.target
+
+[Service]
+Type=forking
+User=jira
+PIDFile={{ jira_base_dir }}/work/catalina.pid
+ExecStart={{ jira_base_dir }}/bin/start-jira.sh
+ExecStop={{ jira_base_dir }}/bin/stop-jira.sh
+
+[Install]
+WantedBy=multi-user.target

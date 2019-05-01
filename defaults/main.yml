@@ -1,0 +1,7 @@
+---
+# defaults file for tamay.jira
+
+jira_version: 8.1.0
+
+jira_base_dir: /opt/atlassian/jira
+jira_data_dir: /var/atlassian/application-data/jira

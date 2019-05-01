@@ -1,0 +1,39 @@
+---
+# tasks file for tamay.jira
+
+- name: "Create /root/packages/jira"
+  file:
+    state: directory
+    path: /root/packages/jira
+    owner: root
+    group: root
+
+- name: "Download jira-software installer"
+  get_url:
+    url: "{{ jira_installer_url }}"
+    dest: /root/packages/jira/atlassian-jira-software-{{ jira_version }}-x64.bin
+    owner: root
+    group: root
+    mode: 0750
+
+- name: "Copy response.varfile"
+  template:
+    src: response.varfile.j2
+    dest: /root/packages/jira/response.varfile
+    owner: root
+    group: root
+    mode: 0640
+
+- name: "Execute installer"
+  shell: /root/packages/jira/atlassian-jira-software-{{ jira_version }}-x64.bin -q -varfile /root/packages/jira/response.varfile
+  args:
+    creates: "{{ jira_base_dir }}/README.md"
+
+- name: "Copy systemd unit file for jira-software"
+  template:
+    src: jira-software.service.j2
+    dest: /etc/systemd/system/jira-software.service
+    owner: root
+    group: root
+    mode: 0664
+  notify: start_jira
