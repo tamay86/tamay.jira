@@ -25,6 +25,14 @@ Path where jira will be installed.
 
 Path where jira will keep it's application data.
 
+    jira_server_connector:
+      name: default
+      proxyName: "{{ ansible_fqdn }}"
+
+Configures the connector in ```server.xml```. Possible values are ```default```, ```http-proxy``` and ```https-proxy```. For explanation see contents of ```server.xml```.
+Most commonly used is **https-proxy** for usage with a reverse proxy, that terminates SSL, such as *httpd*, *nginx*, or *haproxy*.
+
+**proxyName** is only used with ```http-proxy``` and ```https-proxy```.
 
 Dependencies
 ------------

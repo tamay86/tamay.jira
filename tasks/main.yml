@@ -29,6 +29,15 @@
   args:
     creates: "{{ jira_base_dir }}/README.md"
 
+- name: "Copy server.xml"
+  template:
+    src: server.xml.j2
+    dest: "{{ jira_base_dir }}/conf/server.xml"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_jira
+
 - name: "Copy systemd unit file for jira-software"
   template:
     src: jira-software.service.j2
@@ -36,4 +45,4 @@
     owner: root
     group: root
     mode: 0664
-  notify: start_jira
+  notify: daemon_reload

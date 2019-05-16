@@ -4,11 +4,11 @@
 - name: "Reload systemd"
   systemd:
     daemon-reload: yes
-  listen: start_jira
+  listen: daemon_reload
 
-- name: "Start jira"
+- name: "Restart jira"
   service:
     name: jira-software
-    state: started
+    state: restarted
     enabled: yes
-  listen: start_jira
+  listen: restart_jira

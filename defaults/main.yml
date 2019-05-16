@@ -1,7 +1,19 @@
 ---
 # defaults file for tamay.jira
 
+# Version of confluence to download.
+# See https://de.atlassian.com/software/jira/download
 jira_version: 8.1.0
 
+# Path of jira install dir
 jira_base_dir: /opt/atlassian/jira
+
+# Path of jira data dir
 jira_data_dir: /var/atlassian/application-data/jira
+
+# Connector to use in server.xml
+# Possible connectors are:
+# 'default', 'http-proxy', and 'https-proxy'
+jira_server_connector:
+  name: default
+  proxyName: "{{ ansible_fqdn }}"
